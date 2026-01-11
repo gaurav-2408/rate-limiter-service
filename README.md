@@ -1,2 +1,3 @@
 Initial README note will commmit more changes
--[]Need to add some tasks
+-[x]Need to add some tasks
+-[]per api rate limit
