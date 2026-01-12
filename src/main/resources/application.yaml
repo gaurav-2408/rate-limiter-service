@@ -1,3 +1,10 @@
-spring:
-  application:
-    name: rate-limiter-service
+rate-limit:
+  rules:
+    - api: /payments
+      method: GET
+      limit: 5
+      windowMs: 60000
+    - api: /gateway
+      method: GET
+      limit: 20
+      windowMs: 60000
