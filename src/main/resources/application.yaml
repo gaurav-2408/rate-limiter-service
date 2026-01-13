@@ -1,10 +1,10 @@
 rate-limit:
   rules:
     - api: /payments
-      method: GET
+      httpMethod: GET
       limit: 5
-      windowMs: 60000
+      windowInSeconds: 60000
     - api: /gateway
-      method: GET
+      httpMethod: GET
       limit: 4
-      windowMs: 60000
+      windowInSeconds: 60000

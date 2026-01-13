@@ -15,8 +15,8 @@ public class InMemoryRateLimiterService implements RateLimiterService {
     private final Map<String, RateLimitBucket> buckets = new ConcurrentHashMap<>();
     private final Map<String, RateLimitRule> ruleMap = new ConcurrentHashMap<>();
 
-    public InMemoryRateLimiterService(RateLimitProperties properties){
-        for(RateLimitRule rule: properties.getRules()){
+    public InMemoryRateLimiterService(RateLimitProperties properties) {
+        for (RateLimitRule rule : properties.getRules()) {
             String ruleKey = buildRuleKey(rule.getApi(), rule.getHttpMethod());
             ruleMap.put(ruleKey, rule);
         }
@@ -27,13 +27,19 @@ public class InMemoryRateLimiterService implements RateLimiterService {
         String ruleKey = buildRuleKey(api, httpMethod);
         RateLimitRule rule = ruleMap.get(ruleKey);
 
-        if(null == rule){
+        System.out.println("Looking for rule key: " + ruleKey);
+
+        if (null == rule) {
+            System.out.print("working");
             return true;
         }
 
         String bucketKey = buildBucketKey(clientId, api, httpMethod);
 
-        RateLimitBucket bucket = buckets.computeIfAbsent(bucketKey, k->new RateLimitBucket(rule.getLimit(), rule.getWindowInSeconds()));
+        RateLimitBucket bucket = buckets.computeIfAbsent(bucketKey,
+                k -> new RateLimitBucket(rule.getLimit(), rule.getWindowInSeconds()));
+
+        System.out.println("Looking for rule key: " + buildRuleKey(api, httpMethod));
 
         return bucket.allowRequest();
     }
@@ -42,7 +48,7 @@ public class InMemoryRateLimiterService implements RateLimiterService {
         return clientId + "|" + api + "|" + httpMethod;
     }
 
-    private String buildRuleKey(String api, String method){
+    private String buildRuleKey(String api, String method) {
         return api + "|" + method;
     }
 }
