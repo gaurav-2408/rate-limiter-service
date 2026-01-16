@@ -3,4 +3,5 @@ Initial README note will commmit more changes
 -[x]per api rate limit
 -[x]bucket limiting
 -[ ]Real API rate limiting logic
+-[ ]Make real APIs
 -[x]connnection with AWS
