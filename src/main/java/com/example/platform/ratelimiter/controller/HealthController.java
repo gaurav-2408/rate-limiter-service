@@ -9,4 +9,9 @@ public class HealthController {
     public String health() {
         return "Rate Limiter Service is UP";
     }
+
+    @GetMapping("/health-test")
+    public String healthTest() {
+        return "Rate Limiter Service is UP";
+    }
 }
